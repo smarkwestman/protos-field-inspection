@@ -90,7 +90,7 @@ function App() {
     setBusy(false);
   }
 
-  return <div className="app"><main ref={reportRef} className="report"><header className="header"><div className="logo"><ShieldCheck size={32}/></div><div><h1>Field Operations Inspection Report</h1><p>Standalone scored inspection PDF generator</p></div><ScoreBadge label="Overall" value={overall}/></header>
+  return <div className="app"><main ref={reportRef} className="report"><header className="header"><div className="logo"><ShieldCheck size={32}/></div><div><h1>Field Operations Inspection Report</h1><p>Protos Security: Operations</p></div><ScoreBadge label="Overall" value={overall}/></header>
 
   <section className="card"><h2>Visit Information & Officer Profile</h2><div className="two-col"><div className="grid"><Field label="Client" required value={visit.client} onChange={v => updateVisit('client', v)} /><Field label="Vendor" required value={visit.vendor} onChange={v => updateVisit('vendor', v)} /><Field label="Site Name" required value={visit.siteName} onChange={v => updateVisit('siteName', v)} /><Field label="Address" value={visit.address} onChange={v => updateVisit('address', v)} /><Field label="Visit Date & Time" value={visit.visitDateTime} onChange={v => updateVisit('visitDateTime', v)} /><Field label="FOM" value={visit.fom} onChange={v => updateVisit('fom', v)} /><Field label="SSA" value={visit.ssa} onChange={v => updateVisit('ssa', v)} /><label className="field"><span>Status</span><select value={visit.status} onChange={e => updateVisit('status', e.target.value)}><option>Complete</option><option>Case Filed</option></select></label></div><PhotoInput label="Officer Photo" files={officerPhoto} setFiles={setOfficerPhoto}/></div></section>
 
