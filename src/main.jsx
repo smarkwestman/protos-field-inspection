@@ -40,7 +40,51 @@ function PhotoInput({ label, files, setFiles, multiple }) {
 }
 
 function SignaturePad({ value, onChange }) {
-  return <div className="signature-box"><p>The information contained in this report is accurate and true to the best of my knowledge.</p><label className="field"><span>Signature / Signer Name *</span><input value={value} onChange={e => onChange(e.target.value)} placeholder="Prototype: type signer name. Later: touchscreen signature pad." /></label></div>;
+  const canvasRef = useRef(null);
+  const drawing = useRef(false);
+
+  const getPoint = (e) => {
+    const rect = canvasRef.current.getBoundingClientRect();
+    const touch = e.touches?.[0];
+    return {
+      x: (touch ? touch.clientX : e.clientX) - rect.left,
+      y: (touch ? touch.clientY : e.clientY) - rect.top
+    };
+  };
+
+  const start = (e) => {
+    e.preventDefault();
+    drawing.current = true;
+    const ctx = canvasRef.current.getContext("2d");
+    const p = getPoint(e);
+    ctx.beginPath();
+    ctx.moveTo(p.x, p.y);
+  };
+
+  const move = (e) => {
+    if (!drawing.current) return;
+    e.preventDefault();
+    const ctx = canvasRef.current.getContext("2d");
+    const p = getPoint(e);
+    ctx.lineWidth = 3;
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "#ffffff";
+    ctx.lineTo(p.x, p.y);
+    ctx.stroke();
+    onChange(canvasRef.current.toDataURL("image/png"));
+  };
+
+  const stop = () => {
+    drawing.current = false;
+  };
+
+  const clear = () => {
+    const canvas = canvasRef.current;
+    canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+    onChange("");
+  };
+
+  return <div className="signature-box"><p>The information contained in this report is accurate and true to the best of my knowledge.</p><div className="signature-pad-wrap"><canvas ref={canvasRef} width="700" height="220" className="signature-pad" onMouseDown={start} onMouseMove={move} onMouseUp={stop} onMouseLeave={stop} onTouchStart={start} onTouchMove={move} onTouchEnd={stop}></canvas><button type="button" onClick={clear}>Clear Signature</button></div></div>;
 }
 
 function App() {
