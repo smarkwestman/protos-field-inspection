@@ -11,7 +11,7 @@ const ratingOptions = ['N/A', '1', '2', '3', '4', '5'];
 const sections = [
   { key: 'appearance', title: 'Appearance', items: ['Uniform Compliance & Cleanliness', 'Personal Grooming & Hygiene', 'Professional Presence', 'Valid Guard Card', 'Equipment and Readiness'] },
   { key: 'postOrders', title: 'Post Order Compliance / Comprehension', items: ['Post Orders on Site', 'Knows Post Responsibilities', 'Emergency Procedures', 'Post Order Execution'] },
-  { key: 'jobPerformance', title: 'Job Performance', items: ['Situational Awareness', 'Proactive', 'Customer Service', 'Client/Staff Engagement'] },
+  { key: 'jobPerformance', title: 'Job Performance', items: ['Situational Awareness', 'Proactive', 'Customer Service', 'Client / Staff Engagement'] },
   { key: 'technology', title: 'Protos Technology', items: ['App Downloaded', 'Compliance with App Usage', 'Incident Reporting', 'DAR', 'Guard Tour Completion'] },
   { key: 'clientVoice', title: 'Voice of the Client', items: ['Punctuality & Check In', 'Professionalism and Demeanor', 'Customer Service / Engagement', 'Response to Incidents', 'Communication Skills', 'Overall Client Satisfaction'] },
 ];
