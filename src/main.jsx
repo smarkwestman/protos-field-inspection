@@ -194,7 +194,7 @@ async function generatePdf(email=false) {
   y += 1.45;
 
   // Officer + score summary
-  sectionBox('Officer Information & Score Summary', 2.15);
+  sectionBox('Officer Information & Score Summary', 1.85);
   const officerName = document.querySelector('.officer-name-input')?.value || '';
   textLine('Officer:', officerName, margin + 0.15, y + 0.55);
   textLine('SSA:', visit.ssa, margin + 0.15, y + 0.85);
