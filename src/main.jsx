@@ -71,7 +71,7 @@ function SignaturePad({ value, onChange }) {
     ctx.strokeStyle = "#ffffff";
     ctx.lineTo(p.x, p.y);
     ctx.stroke();
-    onChange(canvasRef.current.toDataURL("image/png"));
+    const saved = document.createElement("canvas"); saved.width = canvasRef.current.width; saved.height = canvasRef.current.height; const sctx = saved.getContext("2d"); sctx.drawImage(canvasRef.current, 0, 0); const imageData = sctx.getImageData(0, 0, saved.width, saved.height); for (let i = 0; i < imageData.data.length; i += 4) { if (imageData.data[i + 3] > 10) { imageData.data[i] = 0; imageData.data[i + 1] = 0; imageData.data[i + 2] = 0; } } sctx.putImageData(imageData, 0, 0); onChange(saved.toDataURL("image/png"));
   };
 
   const stop = () => {
