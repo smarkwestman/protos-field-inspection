@@ -163,13 +163,13 @@ async function generatePdf(email=false) {
 
   // Header
   pdf.setFont('helvetica', 'bold');
-  pdf.setFontSize(20);
+  pdf.setFontSize(16);
   pdf.setTextColor(blue);
   pdf.text('PROTOS SECURITY', margin, y + 0.2);
-  pdf.setFontSize(15);
+  pdf.setFontSize(11);
   pdf.text('Field Operations Inspection Report', margin, y + 0.55);
   pdf.setFont('helvetica', 'normal');
-  pdf.setFontSize(10);
+  pdf.setFontSize(9);
   pdf.setTextColor(gray);
   pdf.text('Protos Security: Operations', margin, y + 0.82);
 
@@ -177,9 +177,9 @@ async function generatePdf(email=false) {
   pdf.roundedRect(6.55, y + 0.08, 1.45, 0.55, 0.08, 0.08, 'F');
   pdf.setTextColor(255, 255, 255);
   pdf.setFont('helvetica', 'bold');
-  pdf.setFontSize(10);
+  pdf.setFontSize(9);
   pdf.text('OVERALL SCORE', 6.72, y + 0.3);
-  pdf.setFontSize(13);
+  pdf.setFontSize(11);
   pdf.text(scoreText(overall), 7.25, y + 0.52);
   y += 1.05;
 
