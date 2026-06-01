@@ -251,7 +251,9 @@ async function generatePdf(email=false) {
   // Actions + Signature
   sectionBox('Post-Inspection Actions & Signature', 1.45);
   textLine('SSA Notified:', ssaNotified ? 'Yes' : 'No', margin + 0.15, y + 0.55);
-  textLine('Salesforce Case Type: ', caseFiled || 'None', margin + 3.2, y + 0.55);
+  pdf.setFont('helvetica', 'bold'); pdf.setFontSize(8.5); pdf.setTextColor(gray); pdf.text('Salesforce Case Type:', margin + 3.2, y + 0.55);
+pdf.setFont('helvetica', 'normal'); pdf.setFontSize(9.5); pdf.setTextColor(0,0,0);
+pdf.text(caseFiled || 'None', margin + 4.85, y + 0.55);
 
   if (signature) {
     pdf.addImage(signature, 'PNG', margin + 0.15, y + 0.75, 2.7, 0.45);
