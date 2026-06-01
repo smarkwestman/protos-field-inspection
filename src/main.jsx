@@ -89,7 +89,7 @@ function SignaturePad({ value, onChange }) {
 
 function App() {
   const reportRef = useRef(null);
-  const [visit, setVisit] = useState({ client:'', vendor:'', siteName:'', address:'', visitDateTime:new Date().toLocaleString(), fom:'', ssa:'', status:'Complete' });
+  const [visit, setVisit] = useState({ client:'', vendor:'', siteName:'', address:'', visitDateTime:new Date().toLocaleString(), fom:'', ssa:'', officerName:'', status:'Complete' });
   const [ratings, setRatings] = useState({});
   const [jobNotes, setJobNotes] = useState('');
   const [summary, setSummary] = useState('');
@@ -290,7 +290,9 @@ async function generatePdf(email=false) {
 
   return <div className="app"><main ref={reportRef} className="report"><header className="header"><div className="logo"><img src="/protos-shield-1.png" alt="Protos Shield" style={{width:'48px',height:'48px'}} /></div><div><h1>Field Operations Inspection Report</h1><p>Protos Security: Operations</p></div><ScoreBadge label="Overall Score" value={overall}/></header>
 
-  <section className="card"><h2>Visit Information & Officer Profile</h2><div className="two-col"><div className="grid"><Field label="Client" required value={visit.client} onChange={v => updateVisit('client', v)} /><Field label="Vendor" required value={visit.vendor} onChange={v => updateVisit('vendor', v)} /><Field label="Site Name" required value={visit.siteName} onChange={v => updateVisit('siteName', v)} /><Field label="Address" value={visit.address} onChange={v => updateVisit('address', v)} /><Field label="Visit Date & Time" value={visit.visitDateTime} onChange={v => updateVisit('visitDateTime', v)} /><Field label="FOM" value={visit.fom} onChange={v => updateVisit('fom', v)} /><Field label="SSA" value={visit.ssa} onChange={v => updateVisit('ssa', v)} /><label className="field"><span>Status</span><select value={visit.status} onChange={e => updateVisit('status', e.target.value)}><option>Complete</option><option>Case Filed</option></select></label></div><PhotoInput label="Uniform Photo" files={officerPhoto} setFiles={setOfficerPhoto}/></div></section>
+  <section className="card"><h2>Visit Information & Officer Profile</h2><div className="two-col"><div className="grid"><Field label="Client" required value={visit.client} onChange={v => updateVisit('client', v)} /><Field label="Vendor" required value={visit.vendor} onChange={v => updateVisit('vendor', v)} /><Field label="Site Name" required value={visit.siteName} onChange={v => updateVisit('siteName', v)} /><Field label="Address" value={visit.address} onChange={v => updateVisit('address', v)} /><Field label="Visit Date & Time" value={visit.visitDateTime} onChange={v => updateVisit('visitDateTime', v)} /><Field label="FOM" value={visit.fom} onChange={v => updateVisit('fom', v)} />
+<Field label="Officer Name" value={visit.officerName} onChange={v => updateVisit('officerName', v)} />
+<Field label="SSA" value={visit.ssa} onChange={v => updateVisit('ssa', v)} /><label className="field"><span>Status</span><select value={visit.status} onChange={e => updateVisit('status', e.target.value)}><option>Complete</option><option>Case Filed</option></select></label></div><PhotoInput label="Uniform Photo" files={officerPhoto} setFiles={setOfficerPhoto}/></div></section>
 
   {sections.map(section => <section className="card" key={section.key}><div className="section-head"><h2>{section.title}</h2><ScoreBadge label="Score" value={scores[section.key]}/></div>{section.items.map(item => <RatingRow key={item} label={item} value={ratings[section.key]?.[item]} onChange={v => updateRating(section.key, item, v)}/>) }{section.notes && <textarea value={jobNotes} onChange={e => setJobNotes(e.target.value)} placeholder="Job Performance Notes"/>}</section>)}
 
