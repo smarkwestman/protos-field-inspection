@@ -201,7 +201,7 @@ async function generatePdf(email=false) {
   textLine('Site:', visit.siteName, margin + 0.15, y + 0.85);
  textLine('Address:', String(visit.address || '').slice(0, 40), margin + 3.9, y + 0.85);
   textLine('Visit Date:', visit.visitDateTime, margin + 0.15, y + 1.15);
-  textLine('FOM:', visit.fom, margin + 3.9, y + 1.85);
+  textLine('FOM:', visit.fom, margin + 3.9, y + 1.15);
   y += 1.45;
 
   // Officer + score summary
@@ -220,7 +220,7 @@ async function generatePdf(email=false) {
 
   if (officerPhoto[0]) {
     const img = await fileToDataUrl(officerPhoto[0]);
-    pdf.addImage(img, 'JPEG', 5.75, y + 0.28, 1.75, 1.65);
+    pdf.addImage(img, 'JPEG', 5.95, y + 0.18, 1.55, 1.55);
   }
 
   y += 2.10;
