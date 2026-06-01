@@ -199,7 +199,9 @@ async function generatePdf(email=false) {
   textLine('Client:', visit.client, margin + 0.15, y + 0.55);
   textLine('Vendor:', visit.vendor, margin + 3.9, y + 0.55);
   textLine('Site:', visit.siteName, margin + 0.15, y + 0.85);
-  textLine('Address:', visit.address, margin + 3.9, y + 0.85);
+  pdf.setFont('helvetica', 'bold'); pdf.setFontSize(8.5); pdf.setTextColor(gray); pdf.text('Address:', margin + 3.9, y + 0.85);
+pdf.setFont('helvetica', 'normal'); pdf.setFontSize(9.5); pdf.setTextColor(0,0,0);
+pdf.text(pdf.splitTextToSize(String(visit.address || ''), 2.45), margin + 5.05, y + 0.85);
   textLine('Visit Date:', visit.visitDateTime, margin + 0.15, y + 1.15);
   textLine('FOM:', visit.fom, margin + 3.9, y + 1.15);
   y += 1.45;
