@@ -199,9 +199,9 @@ async function generatePdf(email=false) {
   textLine('Client:', visit.client, margin + 0.15, y + 0.55);
   textLine('Vendor:', visit.vendor, margin + 3.9, y + 0.55);
   textLine('Site:', visit.siteName, margin + 0.15, y + 0.85);
- textLine('Address:', String(visit.address || '').slice(0, 60), margin + 3.9, y + 0.85);
+ textLine('Address:', String(visit.address || '').slice(0, 40), margin + 3.9, y + 0.85);
   textLine('Visit Date:', visit.visitDateTime, margin + 0.15, y + 1.15);
-  textLine('FOM:', visit.fom, margin + 3.9, y + 1.15);
+  textLine('FOM:', visit.fom, margin + 3.9, y + 1.85);
   y += 1.45;
 
   // Officer + score summary
