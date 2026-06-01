@@ -191,7 +191,7 @@ async function generatePdf(email=false) {
   pdf.text('OVERALL SCORE', 6.72, y + 0.3);
   pdf.setFontSize(11);
   pdf.text(scoreText(overall), 7.25, y + 0.52);
-  y += 1.05;
+  y += 0.85;
 
   // Visit Info
   sectionBox('Visit Information', 1.35);
