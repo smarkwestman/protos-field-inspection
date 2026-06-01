@@ -269,7 +269,8 @@ pdf.text(caseFiled || 'None', margin + 4.85, y + 0.55);
       const img = await fileToDataUrl(fieldPhotos[i]);
       const x = i % 2 === 0 ? margin : 4.4;
       if (i % 2 === 0 && i !== 0) y += 2.25;
-      pdf.addImage(img, 'JPEG', x, y, 3.35, 2.0);
+      pdf.rect(x, y, 3.35, 2.0);
+pdf.addImage(img, 'JPEG', x + 0.05, y + 0.05, 3.25, 1.90);
       if (i % 2 === 1) y += 2.25;
     }
   }
