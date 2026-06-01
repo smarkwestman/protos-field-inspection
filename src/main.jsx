@@ -209,7 +209,7 @@ async function generatePdf(email=false) {
 
   if (officerPhoto[0]) {
     const img = await fileToDataUrl(officerPhoto[0]);
-    pdf.addImage(img, 'JPEG', 6.15, y + 0.35, 1.55, 1.75);
+    pdf.addImage(img, 'JPEG', 6.15, y + 0.35, 1.75, 1.55, undefined, 'FAST', 90);
   }
 
   y += 2.45;
