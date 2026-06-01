@@ -201,9 +201,9 @@ async function generatePdf(email=false) {
   textLine('Status:', visit.status, margin + 0.15, y + 1.15);
 
   let sy = y + 0.55;
-  Object.keys(sectionScores).forEach((key) => {
+  Object.keys(scores).forEach((key) => {
     const section = sections.find(s => s.key === key);
-    textLine(section?.title + ':', scoreText(sectionScores[key]), margin + 2.55, sy);
+    textLine(section?.title + ':', scoreText(scores[key]), margin + 2.55, sy);
     sy += 0.25;
   });
 
@@ -224,7 +224,7 @@ async function generatePdf(email=false) {
       textLine(item + ':', val, margin + 0.15, rowY);
       rowY += 0.22;
     });
-    textLine('Section Score:', scoreText(sectionScores[section.key]), margin + 5.65, y + 0.55);
+    textLine('Section Score:', scoreText(scores[section.key]), margin + 5.65, y + 0.55);
     y += h + 0.15;
   });
 
