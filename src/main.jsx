@@ -68,7 +68,7 @@ function SignaturePad({ value, onChange }) {
     const p = getPoint(e);
     ctx.lineWidth = 3;
     ctx.lineCap = "round";
-    ctx.strokeStyle = "#111111";
+    ctx.strokeStyle = "#ffffff";
     ctx.lineTo(p.x, p.y);
     ctx.stroke();
     onChange(canvasRef.current.toDataURL("image/png"));
