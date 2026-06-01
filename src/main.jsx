@@ -222,7 +222,7 @@ async function generatePdf(email=false) {
     section.items.forEach((item) => {
       const val = ratings[section.key]?.[item] || 'N/A';
       pdf.setFont('helvetica', 'bold'); pdf.setFontSize(8); pdf.setTextColor(gray); pdf.text(item + ':', margin + 0.15, rowY); pdf.setFont('helvetica', 'normal'); pdf.setFontSize(8); pdf.setTextColor(0,0,0); pdf.text(String(val), margin + 3.15, rowY);
-      rowY += 0.16;
+      rowY += 0.14;
     });
     textLine('Section Score:', scoreText(scores[section.key]), margin + 5.65, y + 0.55);
     y += h + 0.15;
