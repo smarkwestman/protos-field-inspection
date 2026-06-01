@@ -199,11 +199,11 @@ async function generatePdf(email=false) {
   textLine('Client:', visit.client, margin + 0.15, y + 0.55);
   textLine('Vendor:', visit.vendor, margin + 3.9, y + 0.55);
   textLine('Site:', visit.siteName, margin + 0.15, y + 0.85);
-  pdf.setFont('helvetica', 'bold'); pdf.setFontSize(8.5); pdf.setTextColor(gray); pdf.text('Address:', margin + 3.9, y + 0.85);
+ pdf.setFont('helvetica', 'bold'); pdf.setFontSize(8.5); pdf.setTextColor(gray); pdf.text('Address:', margin + 0.15, y + 1.15);
 pdf.setFont('helvetica', 'normal'); pdf.setFontSize(9.5); pdf.setTextColor(0,0,0);
-pdf.text(pdf.splitTextToSize(String(visit.address || ''), 2.45), margin + 5.05, y + 0.85);
+pdf.text(pdf.splitTextToSize(String(visit.address || ''), 5.8), margin + 1.3, y + 1.15);
   textLine('Visit Date:', visit.visitDateTime, margin + 0.15, y + 1.15);
-  textLine('FOM:', visit.fom, margin + 3.9, y + 1.15);
+  textLine('FOM:', visit.fom, margin + 3.9, y + 1.45);
   y += 1.45;
 
   // Officer + score summary
@@ -211,7 +211,7 @@ pdf.text(pdf.splitTextToSize(String(visit.address || ''), 2.45), margin + 5.05, 
   const officerName = visit.officerName || '';
   textLine('Officer:', officerName, margin + 0.15, y + 0.55);
   textLine('SSA:', visit.ssa, margin + 0.15, y + 0.85);
-  textLine('Status:', visit.status, margin + 0.15, y + 1.15);
+  ('Status:', visit.status, margin + 0.15, y + 1.15);
 
   let sy = y + 0.55;
   Object.keys(scores).forEach((key) => {
