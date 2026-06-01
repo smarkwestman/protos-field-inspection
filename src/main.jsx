@@ -212,7 +212,7 @@ async function generatePdf(email=false) {
     pdf.addImage(img, 'JPEG', 6.35, y - 1.10, 1.45, 1.35, undefined, 'FAST', 270);
   }
 
-  y += 2.35;
+  y += 2.10;
 
   // Detailed scoring
   sections.forEach((section) => {
