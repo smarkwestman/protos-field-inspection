@@ -176,7 +176,7 @@ async function generatePdf(email=false) {
   pdf.setFont('helvetica', 'bold');
   pdf.setFontSize(16);
   pdf.setTextColor(blue);
-  pdf.text('PROTOS SECURITY', margin, y + 0.2);
+  pdf.addImage('/Protos-logo.png', 'PNG', margin, y - 0.05, 2.0, 0.45);
   pdf.setFontSize(11);
   pdf.text('Field Operations Inspection Report', margin, y + 0.55);
   pdf.setFont('helvetica', 'normal');
