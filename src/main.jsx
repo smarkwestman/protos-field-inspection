@@ -36,7 +36,7 @@ function RatingRow({ label, value, onChange }) {
 function PhotoInput({ label, files, setFiles, multiple }) {
   const ref = useRef(null);
   const previews = useMemo(() => files.map(file => ({ file, url: URL.createObjectURL(file) })), [files]);
-  return <div className="photo-box"><div className="photo-top"><div><b>{label}</b>{label === 'Uniform Photo' && <input className="officer-name-input" placeholder="Officer Name" />}</div><button type="button" onClick={() => ref.current?.click()}><Camera size={18}/> Add</button></div><input ref={ref} type="file" accept="image/*" capture="environment" multiple={multiple} hidden onChange={e => { const selected = Array.from(e.target.files || []); setFiles(multiple ? [...files, ...selected] : selected.slice(0,1)); }} />{previews.length > 0 && <div className="photo-grid">{previews.map((p,i) => <div className="photo-preview" key={i}><img src={p.url}/><button type="button" onClick={() => setFiles(files.filter((_,idx) => idx !== i))}><Trash2 size={14}/></button></div>)}</div>}</div>;
+  return <div className="photo-box"><div className="photo-top"><div><b>{label}</b></div><button type="button" onClick={() => ref.current?.click()}><Camera size={18}/> Add</button></div><input ref={ref} type="file" accept="image/*" capture="environment" multiple={multiple} hidden onChange={e => { const selected = Array.from(e.target.files || []); setFiles(multiple ? [...files, ...selected] : selected.slice(0,1)); }} />{previews.length > 0 && <div className="photo-grid">{previews.map((p,i) => <div className="photo-preview" key={i}><img src={p.url}/><button type="button" onClick={() => setFiles(files.filter((_,idx) => idx !== i))}><Trash2 size={14}/></button></div>)}</div>}</div>;
 }
 
 function SignaturePad({ value, onChange }) {
@@ -220,7 +220,7 @@ async function generatePdf(email=false) {
 
   if (officerPhoto[0]) {
     const img = await fileToDataUrl(officerPhoto[0]);
-    pdf.addImage(img, 'JPEG', 6.10, y + 0.10, 1.25, 1.25);
+    pdf.addImage(img, 'JPEG', 5.95, y + 0.00, 1.55, 1.45);
   }
 
   y += 2.10;
