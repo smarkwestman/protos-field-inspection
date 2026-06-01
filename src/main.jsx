@@ -94,7 +94,7 @@ function App() {
   const [jobNotes, setJobNotes] = useState('');
   const [summary, setSummary] = useState('');
   const [ssaNotified, setSsaNotified] = useState(false);
-  const [caseFiled, setCaseFiled] = useState(false);
+  const [caseFiled, setCaseFiled] = useState('');
   const [signature, setSignature] = useState('');
   const [officerPhoto, setOfficerPhoto] = useState([]);
   const [fieldPhotos, setFieldPhotos] = useState([]);
@@ -251,7 +251,7 @@ async function generatePdf(email=false) {
   // Actions + Signature
   sectionBox('Post-Inspection Actions & Signature', 1.45);
   textLine('SSA Notified:', ssaNotified ? 'Yes' : 'No', margin + 0.15, y + 0.55);
-  textLine('Salesforce Case:', caseFiled ? 'Yes' : 'No', margin + 3.2, y + 0.55);
+  textLine('Salesforce Case Type:', caseFiled || 'None', margin + 3.2, y + 0.55);
 
   if (signature) {
     pdf.addImage(signature, 'PNG', margin + 0.15, y + 0.75, 2.7, 0.45);
@@ -295,7 +295,7 @@ async function generatePdf(email=false) {
 
   {sections.map(section => <section className="card" key={section.key}><div className="section-head"><h2>{section.title}</h2><ScoreBadge label="Score" value={scores[section.key]}/></div>{section.items.map(item => <RatingRow key={item} label={item} value={ratings[section.key]?.[item]} onChange={v => updateRating(section.key, item, v)}/>) }{section.notes && <textarea value={jobNotes} onChange={e => setJobNotes(e.target.value)} placeholder="Job Performance Notes"/>}</section>)}
 
-  <section className="card highlight"><div className="section-head"><h2>Performance Summary & Post-Inspection Actions</h2><ScoreBadge label="Overall Visit" value={overall}/></div><textarea className="summary" value={summary} onChange={e => setSummary(e.target.value)} placeholder="Enter final comprehensive narrative report..."/><div className="two-col"><PhotoInput label="Supporting Field Photos" files={fieldPhotos} setFiles={setFieldPhotos} multiple/><div className="toggles"><label><span>SSA Notified</span><input type="checkbox" checked={ssaNotified} onChange={e => setSsaNotified(e.target.checked)}/></label><label><span>Case Filed in Salesforce</span><input type="checkbox" checked={caseFiled} onChange={e => setCaseFiled(e.target.checked)}/></label></div></div></section>
+  <section className="card highlight"><div className="section-head"><h2>Performance Summary & Post-Inspection Actions</h2><ScoreBadge label="Overall Visit" value={overall}/></div><textarea className="summary" value={summary} onChange={e => setSummary(e.target.value)} placeholder="Enter final comprehensive narrative report..."/><div className="two-col"><PhotoInput label="Supporting Field Photos" files={fieldPhotos} setFiles={setFieldPhotos} multiple/><div className="toggles"><label><span>SSA Notified</span><input type="checkbox" checked={ssaNotified} onChange={e => setSsaNotified(e.target.checked)}/></label><label><span>Salesforce Case Type</span><select value={caseFiled} onChange={e => setCaseFiled(e.target.value)}><option value="">None</option><option value="Concern">Concern</option><option value="Compliment">Compliment</option></select></label></div></div></section>
 
   <section className="card"><h2>Legal Attestation & Sign-Off</h2><SignaturePad value={signature} onChange={setSignature}/></section></main>
 
