@@ -195,11 +195,11 @@ async function generatePdf(email=false) {
   y += 1.05;
 
   // Visit Info
-  sectionBox('Visit Information', 1.55);
+  sectionBox('Visit Information', 1.35);
   textLine('Client:', visit.client, margin + 0.15, y + 0.55);
   textLine('Vendor:', visit.vendor, margin + 3.9, y + 0.55);
   textLine('Site:', visit.siteName, margin + 0.15, y + 0.85);
- textLine('Address:', String(visit.address || '').slice(0, 55), margin + 3.9, y + 0.85);
+ textLine('Address:', String(visit.address || '').slice(0, 60), margin + 3.9, y + 0.85);
   textLine('Visit Date:', visit.visitDateTime, margin + 0.15, y + 1.15);
   textLine('FOM:', visit.fom, margin + 3.9, y + 1.45);
   y += 1.45;
