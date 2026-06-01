@@ -122,10 +122,21 @@ async function generatePdf(email=false) {
   const gray = '#444444';
 
   const fileToDataUrl = (file) => new Promise((resolve) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
-    reader.readAsDataURL(file);
-  });
+  const reader = new FileReader();
+  reader.onload = () => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+      resolve(canvas.toDataURL('image/jpeg', 0.9));
+    };
+    img.src = reader.result;
+  };
+  reader.readAsDataURL(file);
+});
 
   const addPageIfNeeded = (needed = 0.5) => {
     if (y + needed > pageH - margin) {
@@ -209,7 +220,7 @@ async function generatePdf(email=false) {
 
   if (officerPhoto[0]) {
     const img = await fileToDataUrl(officerPhoto[0]);
-    pdf.addImage(img, 'JPEG', 6.35, y - 1.10, 1.45, 1.35, undefined, 'FAST', 270);
+    pdf.addImage(img, 'JPEG', 6.35, y - 1.10, 1.45, 1.35);
   }
 
   y += 2.10;
