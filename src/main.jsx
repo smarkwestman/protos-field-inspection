@@ -194,7 +194,7 @@ async function generatePdf(email=false) {
   y += 1.45;
 
   // Officer + score summary
-  sectionBox('Officer Information & Score Summary', 2.25);
+  sectionBox('Officer Information & Score Summary', 2.95);
   const officerName = document.querySelector('.officer-name-input')?.value || '';
   textLine('Officer:', officerName, margin + 0.15, y + 0.55);
   textLine('SSA:', visit.ssa, margin + 0.15, y + 0.85);
@@ -212,7 +212,7 @@ async function generatePdf(email=false) {
     pdf.addImage(img, 'JPEG', 6.35, y + 0.15, 1.45, 1.35, undefined, 'FAST', 270);
   }
 
-  y += 2.45;
+  y += 3.15;
 
   // Detailed scoring
   sections.forEach((section) => {
