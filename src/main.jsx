@@ -194,7 +194,7 @@ async function generatePdf(email=false) {
   y += 1.45;
 
   // Officer + score summary
-  sectionBox('Officer Information & Score Summary', 1.85);
+  sectionBox('Officer Information & Score Summary', 1.70);
   const officerName = document.querySelector('.officer-name-input')?.value || '';
   textLine('Officer:', officerName, margin + 0.15, y + 0.55);
   textLine('SSA:', visit.ssa, margin + 0.15, y + 0.85);
@@ -203,7 +203,7 @@ async function generatePdf(email=false) {
   let sy = y + 0.55;
   Object.keys(scores).forEach((key) => {
     const section = sections.find(s => s.key === key);
-    textLine(section?.title + ':', scoreText(scores[key]), margin + 2.55, sy);
+    const shortTitle = section?.title === 'Post Order Compliance / Comprehension' ? 'Post Orders' : section?.title; textLine(shortTitle + ':', scoreText(scores[key]), margin + 2.55, sy);
     sy += 0.25;
   });
 
