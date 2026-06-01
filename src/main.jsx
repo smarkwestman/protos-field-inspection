@@ -265,13 +265,13 @@ pdf.text(caseFiled || 'None', margin + 4.85, y + 0.55);
     sectionBox('Supporting Field Photos', 0.55);
     y += 0.7;
     for (let i = 0; i < fieldPhotos.length; i++) {
-      addPageIfNeeded(2.2);
+      addPageIfNeeded(3.25);
       const img = await fileToDataUrl(fieldPhotos[i]);
       const x = i % 2 === 0 ? margin : 4.4;
-      if (i % 2 === 0 && i !== 0) y += 2.25;
-      pdf.rect(x, y, 3.35, 2.0);
-pdf.addImage(img, 'JPEG', x + 0.05, y + 0.05, 3.25, 1.90);
-      if (i % 2 === 1) y += 2.25;
+      if (i % 2 === 0 && i !== 0) y += 3.25;
+      pdf.rect(x, y, 2.25, 3.0);
+pdf.addImage(img, 'JPEG', x + 0.05, y + 0.05, 2.15, 2.90);
+      if (i % 2 === 1) y += 3.25;
     }
   }
 
