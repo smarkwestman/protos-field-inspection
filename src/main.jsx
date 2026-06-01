@@ -251,7 +251,7 @@ async function generatePdf(email=false) {
   // Actions + Signature
   sectionBox('Post-Inspection Actions & Signature', 1.45);
   textLine('SSA Notified:', ssaNotified ? 'Yes' : 'No', margin + 0.15, y + 0.55);
-  textLine('Salesforce Case Type:', caseFiled || 'None', margin + 3.2, y + 0.55);
+  textLine('Salesforce Case Type: ', caseFiled || 'None', margin + 3.2, y + 0.55);
 
   if (signature) {
     pdf.addImage(signature, 'PNG', margin + 0.15, y + 0.75, 2.7, 0.45);
