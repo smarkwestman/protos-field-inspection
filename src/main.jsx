@@ -5,7 +5,7 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import './style.css';
 
-const ORANGE = '#FF6600';
+const ORANGE = '#00A651';
 const ratingOptions = ['N/A', '1', '2', '3', '4', '5'];
 
 const sections = [
