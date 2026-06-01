@@ -182,7 +182,6 @@ async function generatePdf(email=false) {
   pdf.setFont('helvetica', 'normal');
   pdf.setFontSize(9);
   pdf.setTextColor(gray);
-  pdf.text('Protos Security: Operations', margin, y + 0.82);
 
   pdf.setFillColor(0, 166, 81);
   pdf.roundedRect(6.55, y + 0.08, 1.45, 0.55, 0.08, 0.08, 'F');
