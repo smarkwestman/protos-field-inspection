@@ -220,7 +220,7 @@ async function generatePdf(email=false) {
 
   if (officerPhoto[0]) {
     const img = await fileToDataUrl(officerPhoto[0]);
-    pdf.addImage(img, 'JPEG', 5.95, y + 0.00, 1.55, 1.45);
+    pdf.addImage(img, 'JPEG', 5.95, y + 0.18, 1.45, 1.45);
   }
 
   y += 2.10;
