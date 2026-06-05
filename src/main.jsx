@@ -285,23 +285,7 @@ pdf.addImage(img, 'JPEG', x + 0.05, y + 0.05, 2.15, 2.90);
 
 const filename = `Inspection_${visit.siteName || 'Site'}_${new Date().toISOString().slice(0,10)}.pdf`;
 
-if (email) {
-  const blob = pdf.output('blob');
-  const file = new File([blob], filename, { type: 'application/pdf' });
-
-  if (navigator.canShare && navigator.canShare({ files: [file] })) {
-    await navigator.share({
-      title: 'Field Operations Inspection Report',
-      text: `Inspection report for ${visit.siteName || 'site'}`,
-      files: [file]
-    });
-  } else {
-    pdf.save(filename);
-    alert('PDF saved. Open Downloads and share it through Outlook.');
-  }
-} else {
-  pdf.save(filename);
-}
+pdf.save(filename);
 
 setBusy(false);
 }
@@ -318,5 +302,5 @@ setBusy(false);
 
   <section className="card"><h2>Legal Attestation & Sign-Off</h2><SignaturePad value={signature} onChange={setSignature}/></section></main>
 
-<footer className="actions"><span>Required: Client, Vendor, Site Name, Signature.</span><button disabled={!valid || busy} onClick={() => generatePdf(false)}><Download size={18}/> Save Report PDF</button></footer></div>;
+<footer className="actions"><span>Required: Client, Vendor, Site Name, Signature.</span><button disabled={!valid || busy} onClick={() => generatePdf()}><Download size={18}/> Save Report PDF</button></footer></div>;
 createRoot(document.getElementById('root')).render(<App />);
