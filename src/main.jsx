@@ -302,7 +302,6 @@ pdf.addImage(img, 'JPEG', x + 0.05, y + 0.05, 2.15, 2.90);
 
   <section className="card"><h2>Legal Attestation & Sign-Off</h2><SignaturePad value={signature} onChange={setSignature}/></section></main>
 
-  <footer className="actions"><span>Required: Client, Vendor, Site Name, Signature.</span><button disabled={!valid || busy} onClick={() => generatePdf(true)}><Mail size={18}/> Email PDF</button><button disabled={!valid || busy} onClick={() => generatePdf(false)}><Download size={18}/> Save Completed Inspection to PDF</button></footer></div>;
-}
+<footer className="actions"><span>Required: Client, Vendor, Site Name, Signature.</span><button disabled={!valid || busy} onClick={() => generatePdf(true)}><Mail size={18}/> Share Report</button><button disabled={!valid || busy} onClick={() => generatePdf(false)}><Download size={18}/> Save Report PDF</button></footer></div>;}
 
 createRoot(document.getElementById('root')).render(<App />);
