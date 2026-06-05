@@ -1,0 +1,21 @@
+{
+  "name": "Protos Field Inspection",
+  "short_name": "Inspection",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b1220",
+  "theme_color": "#00a651",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/protos-shield-1.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/protos-shield-1.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
