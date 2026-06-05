@@ -283,11 +283,27 @@ pdf.addImage(img, 'JPEG', x + 0.05, y + 0.05, 2.15, 2.90);
     pdf.text(`Page ${i} of ${pages}`, pageW / 2, 10.75, { align: 'center' });
   }
 
-  const filename = `Inspection_${visit.siteName || 'Site'}_${new Date().toISOString().slice(0,10)}.pdf`;
-  pdf.save(filename);
+const filename = `Inspection_${visit.siteName || 'Site'}_${new Date().toISOString().slice(0,10)}.pdf`;
 
-  if (email) alert('PDF downloaded. Next version will email it automatically to your work email.');
-  setBusy(false);
+if (email) {
+  const blob = pdf.output('blob');
+  const file = new File([blob], filename, { type: 'application/pdf' });
+
+  if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    await navigator.share({
+      title: 'Field Operations Inspection Report',
+      text: `Inspection report for ${visit.siteName || 'site'}`,
+      files: [file]
+    });
+  } else {
+    pdf.save(filename);
+    alert('PDF saved. Open Downloads and share it through Outlook.');
+  }
+} else {
+  pdf.save(filename);
+}
+
+setBusy(false);
 }
 
   return <div className="app"><main ref={reportRef} className="report"><header className="header"><div className="logo"><img src="/protos-shield-1.png" alt="Protos Shield" style={{width:'48px',height:'48px'}} /></div><div><h1>Field Operations Inspection Report</h1><p>Protos Security: Operations</p></div><ScoreBadge label="Overall Score" value={overall}/></header>
