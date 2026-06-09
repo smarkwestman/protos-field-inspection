@@ -126,6 +126,10 @@ useEffect(() => {
 if (authLoading) {
   return <div className="app"><h2>Loading...</h2></div>;
 }
+
+  if (!session) {
+  return <div className="app"><h2>Login Required</h2></div>;
+}
   const updateVisit = (key, val) => setVisit(v => ({...v, [key]: val}));
   const updateRating = (section, item, val) => setRatings(r => ({...r, [section]: {...(r[section] || {}), [item]: val}}));
 
