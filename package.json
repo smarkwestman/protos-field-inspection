@@ -11,7 +11,8 @@
     "react-dom": "latest",
     "lucide-react": "latest",
     "jspdf": "latest",
-    "html2canvas": "latest"
+    "html2canvas": "latest",
+    "@supabase/supabase-js": "latest"
   },
   "devDependencies": {}
 }
