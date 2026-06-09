@@ -105,7 +105,21 @@ function App() {
   const [officerPhoto, setOfficerPhoto] = useState([]);
   const [fieldPhotos, setFieldPhotos] = useState([]);
   const [busy, setBusy] = useState(false);
+const [session, setSession] = useState(null);
+const [authLoading, setAuthLoading] = useState(true);
 
+useEffect(() => {
+  supabase.auth.getSession().then(({ data }) => {
+    setSession(data.session);
+    setAuthLoading(false);
+  });
+
+  const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+    setSession(session);
+  });
+
+  return () => listener.subscription.unsubscribe();
+}, []);
   const scores = useMemo(() => Object.fromEntries(sections.map(s => [s.key, average(ratings[s.key])])), [ratings]);
   const overall = useMemo(() => { const vals = Object.values(scores).filter(v => v != null); return vals.length ? vals.reduce((a,b)=>a+b,0)/vals.length : null; }, [scores]);
   const valid = visit.client.trim() && visit.vendor.trim() && visit.siteName.trim() && signature.trim();
