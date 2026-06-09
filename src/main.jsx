@@ -1,12 +1,18 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Camera, Download, Mail, ShieldCheck, Trash2 } from 'lucide-react';
+import { createClient } from '@supabase/supabase-js';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import './style.css';
 
 const ORANGE = '#00A651';
 const ratingOptions = ['N/A', '1', '2', '3', '4', '5'];
+const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL,
+  import.meta.env.VITE_SUPABASE_ANON_KEY
+);
+
 
 const sections = [
   { key: 'appearance', title: 'Appearance', items: ['Uniform Compliance & Cleanliness', 'Personal Grooming & Hygiene', 'Professional Presence', 'Valid Guard Card', 'Equipment and Readiness'] },
