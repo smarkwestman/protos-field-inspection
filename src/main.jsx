@@ -92,7 +92,52 @@ function SignaturePad({ value, onChange }) {
 
   return <div className="signature-box"><p>The information contained in this report is accurate and true to the best of my knowledge.</p><div className="signature-pad-wrap"><canvas ref={canvasRef} width="700" height="220" className="signature-pad" onMouseDown={start} onMouseMove={move} onMouseUp={stop} onMouseLeave={stop} onTouchStart={start} onTouchMove={move} onTouchEnd={stop}></canvas><button type="button" onClick={clear}>Clear Signature</button></div></div>;
 }
+function LoginScreen() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
+  const signIn = async () => {
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password
+    });
+
+    if (error) setError(error.message);
+  };
+
+  return (
+    <div className="app">
+      <div className="card" style={{ maxWidth: '420px', margin: '60px auto' }}>
+        <h2>Protos Field Inspection Login</h2>
+
+        <label className="field">
+          <span>Email Address</span>
+          <input
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            type="email"
+          />
+        </label>
+
+        <label className="field">
+          <span>Password</span>
+          <input
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            type="password"
+          />
+        </label>
+
+        {error && <p>{error}</p>}
+
+        <button onClick={signIn}>
+          Sign In
+        </button>
+      </div>
+    </div>
+  );
+}
 function App() {
   const reportRef = useRef(null);
   const [visit, setVisit] = useState({ client:'', vendor:'', siteName:'', address:'', visitDateTime:new Date().toLocaleString(), fom:'', ssa:'', officerName:'', status:'Complete' });
@@ -127,8 +172,8 @@ if (authLoading) {
   return <div className="app"><h2>Loading...</h2></div>;
 }
 
-  if (!session) {
-  return <div className="app"><h2>Login Required</h2></div>;
+if (!session) {
+  return <LoginScreen />;
 }
   const updateVisit = (key, val) => setVisit(v => ({...v, [key]: val}));
   const updateRating = (section, item, val) => setRatings(r => ({...r, [section]: {...(r[section] || {}), [item]: val}}));
