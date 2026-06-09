@@ -123,7 +123,9 @@ useEffect(() => {
   const scores = useMemo(() => Object.fromEntries(sections.map(s => [s.key, average(ratings[s.key])])), [ratings]);
   const overall = useMemo(() => { const vals = Object.values(scores).filter(v => v != null); return vals.length ? vals.reduce((a,b)=>a+b,0)/vals.length : null; }, [scores]);
   const valid = visit.client.trim() && visit.vendor.trim() && visit.siteName.trim() && signature.trim();
-
+if (authLoading) {
+  return <div className="app"><h2>Loading...</h2></div>;
+}
   const updateVisit = (key, val) => setVisit(v => ({...v, [key]: val}));
   const updateRating = (section, item, val) => setRatings(r => ({...r, [section]: {...(r[section] || {}), [item]: val}}));
 
