@@ -365,6 +365,9 @@ setBusy(false);
 
   <section className="card"><h2>Visit Information & Officer Profile</h2><div className="two-col"><div className="grid"><Field label="Client" required value={visit.client} onChange={v => updateVisit('client', v)} /><Field label="Vendor" required value={visit.vendor} onChange={v => updateVisit('vendor', v)} /><Field label="Site Name" required value={visit.siteName} onChange={v => updateVisit('siteName', v)} /><Field label="Address" value={visit.address} onChange={v => updateVisit('address', v)} /><Field label="Visit Date & Time" value={visit.visitDateTime} onChange={v => updateVisit('visitDateTime', v)} /><Field label="FOM" value={visit.fom} onChange={v => updateVisit('fom', v)} />
 <Field label="Officer Name" value={visit.officerName} onChange={v => updateVisit('officerName', v)} />
+  <Field label="Guard License On Hand? (Y/N)" value={visit.guardLicenseOnHand} onChange={v => updateVisit('guardLicenseOnHand', v)} />
+
+<Field label="Date of Expiration" value={visit.guardLicenseExp} onChange={v => updateVisit('guardLicenseExp', v)} />  
 <Field label="SSA" value={visit.ssa} onChange={v => updateVisit('ssa', v)} /><label className="field"><span>Status</span><select value={visit.status} onChange={e => updateVisit('status', e.target.value)}><option>Complete</option><option>Case Filed</option></select></label></div><PhotoInput label="Uniform Photo" files={officerPhoto} setFiles={setOfficerPhoto}/></div></section>
 
   {sections.map(section => <section className="card" key={section.key}><div className="section-head"><h2>{section.title}</h2><ScoreBadge label="Score" value={scores[section.key]}/></div>{section.items.map(item => <RatingRow key={item} label={item} value={ratings[section.key]?.[item]} onChange={v => updateRating(section.key, item, v)}/>) }{section.notes && <textarea value={jobNotes} onChange={e => setJobNotes(e.target.value)} placeholder="Job Performance Notes"/>}</section>)}
