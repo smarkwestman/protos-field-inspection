@@ -321,19 +321,35 @@ textLine('Status:', visit.status, margin + 0.15, y + 1.75);
   pdf.setTextColor(0, 0, 0);
   pdf.text(summaryLines, margin + 0.15, y + 0.55);
   y += summaryH + 0.15;
+// Actions + Signature
+sectionBox('Post-Inspection Actions & Signature', 1.45);
 
-  // Actions + Signature
-  sectionBox('Post-Inspection Actions & Signature', 1.45);
-  textLine('SSA Notified:', ssaNotified ? 'Yes' : 'No', margin + 0.15, y + 0.55);
-  pdf.setFont('helvetica', 'bold'); pdf.setFontSize(8.5); pdf.setTextColor(gray); pdf.text('Salesforce Case Type:', margin + 3.2, y + 0.55);
-pdf.setFont('helvetica', 'normal'); pdf.setFontSize(9.5); pdf.setTextColor(0,0,0);
-pdf.text(caseFiled || 'None', margin + 4.85, y + 0.55);
+textLine('SSA Notified:', ssaNotified ? 'Yes' : 'No', margin + 0.15, y + 0.45);
 
-  if (signature) {
-    pdf.addImage(signature, 'PNG', margin + 0.15, y + 0.75, 2.7, 0.45);
-  }
-  y += 1.65;
+pdf.setFont('helvetica', 'bold');
+pdf.setFontSize(8.5);
+pdf.setTextColor(gray);
+pdf.text('Salesforce Case Type:', margin + 3.2, y + 0.45);
 
+pdf.setFont('helvetica', 'normal');
+pdf.setFontSize(9.5);
+pdf.setTextColor(0,0,0);
+pdf.text(caseFiled || 'None', margin + 4.85, y + 0.45);
+
+pdf.setFont('helvetica', 'italic');
+pdf.setFontSize(8);
+pdf.setTextColor(gray);
+pdf.text(
+  'I attest that the information contained in this report is accurate and true to the best of my knowledge.',
+  margin + 0.15,
+  y + 0.85
+);
+
+if (signature) {
+  pdf.addImage(signature, 'PNG', margin + 0.15, y + 0.95, 2.7, 0.45);
+}
+
+y += 1.65;
   // Supporting photos
   if (fieldPhotos.length > 0) {
     sectionBox('Supporting Field Photos', 0.55);
