@@ -49,14 +49,19 @@ function SignaturePad({ value, onChange }) {
   const canvasRef = useRef(null);
   const drawing = useRef(false);
 
-  const getPoint = (e) => {
-    const rect = canvasRef.current.getBoundingClientRect();
-    const touch = e.touches?.[0];
-    return {
-      x: (touch ? touch.clientX : e.clientX) - rect.left,
-      y: (touch ? touch.clientY : e.clientY) - rect.top
-    };
+ const getPoint = (e) => {
+  const canvas = canvasRef.current;
+  const rect = canvas.getBoundingClientRect();
+  const touch = e.touches?.[0];
+
+  const clientX = touch ? touch.clientX : e.clientX;
+  const clientY = touch ? touch.clientY : e.clientY;
+
+  return {
+    x: (clientX - rect.left) * (canvas.width / rect.width),
+    y: (clientY - rect.top) * (canvas.height / rect.height)
   };
+};
 
   const start = (e) => {
     e.preventDefault();
