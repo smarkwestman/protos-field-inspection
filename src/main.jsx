@@ -283,8 +283,7 @@ async function generatePdf(email=false) {
   textLine('SSA:', visit.ssa, margin + 0.15, y + 0.85);
   textLine('License On Hand:', visit.guardLicenseOnHand, margin + 0.15, y + 1.15);
 textLine('License Exp:', visit.guardLicenseExp, margin + 0.15, y + 1.45);
-  ('Status:', visit.status, margin + 0.15, y + 1.75);
-
+textLine('Status:', visit.status, margin + 0.15, y + 1.75);
   let sy = y + 0.55;
   Object.keys(scores).forEach((key) => {
     const section = sections.find(s => s.key === key);
