@@ -276,10 +276,14 @@ async function generatePdf(email=false) {
 
   // Officer + score summary
   sectionBox('Officer Information & Score Summary', 1.90);
+  
   const officerName = visit.officerName || '';
+  
   textLine('Officer:', officerName, margin + 0.15, y + 0.55);
   textLine('SSA:', visit.ssa, margin + 0.15, y + 0.85);
-  ('Status:', visit.status, margin + 0.15, y + 1.15);
+  textLine('License On Hand:', visit.guardLicenseOnHand, margin + 0.15, y + 1.15);
+textLine('License Exp:', visit.guardLicenseExp, margin + 0.15, y + 1.45);
+  ('Status:', visit.status, margin + 0.15, y + 1.75);
 
   let sy = y + 0.55;
   Object.keys(scores).forEach((key) => {
