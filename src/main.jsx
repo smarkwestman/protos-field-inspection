@@ -282,7 +282,7 @@ async function generatePdf(email=false) {
   textLine('Officer:', officerName, margin + 0.15, y + 0.55);
   textLine('SSA:', visit.ssa, margin + 0.15, y + 0.85);
   textLine('License On Hand:', visit.guardLicenseOnHand, margin + 0.15, y + 1.15);
-textLine('License Exp:', visit.guardLicenseExp, margin + 0.15, y + 1.45);
+const licenseExpFormatted = visit.guardLicenseExp   ? new Date(visit.guardLicenseExp + 'T00:00:00').toLocaleDateString()   : '';  textLine('License Exp:', licenseExpFormatted, margin + 0.15, y + 1.45);
 textLine('Status:', visit.status, margin + 0.15, y + 1.75);
   let sy = y + 0.55;
   Object.keys(scores).forEach((key) => {
