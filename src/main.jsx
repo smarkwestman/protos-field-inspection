@@ -38,13 +38,67 @@ function ScoreBadge({ label, value }) {
 function RatingRow({ label, value, onChange }) {
   return <div className="rating-row"><span>{label}</span><select value={value || ''} onChange={e => onChange(e.target.value)}><option value="">Select</option>{ratingOptions.map(o => <option key={o} value={o}>{o}</option>)}</select></div>;
 }
-
 function PhotoInput({ label, files, setFiles, multiple }) {
   const ref = useRef(null);
-  const previews = useMemo(() => files.map(file => ({ file, url: URL.createObjectURL(file) })), [files]);
-  return <div className="photo-box"><div className="photo-top"><div><b>{label}</b></div><button type="button" onClick={() => ref.current?.click()}><Camera size={18}/> Add</button></div><input ref={ref} type="file" accept="image/*" capture="environment" multiple={multiple} hidden onChange={e => { const selected = Array.from(e.target.files || []); setFiles(multiple ? [...files, ...selected] : selected.slice(0,1)); }} />{previews.length > 0 && <div className="photo-grid">{previews.map((p,i) => <div className="photo-preview" key={i}><img src={p.url}/><button type="button" onClick={() => setFiles(files.filter((_,idx) => idx !== i))}><Trash2 size={14}/></button></div>)}</div>}</div>;
-}
 
+  const previews = useMemo(() => {
+    return files.map((file) => ({
+      file,
+      url: typeof file === 'string' ? file : URL.createObjectURL(file)
+    }));
+  }, [files]);
+
+  const handleFiles = async (e) => {
+    const selected = Array.from(e.target.files || []);
+
+    const converted = await Promise.all(
+      selected.map(file => new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.readAsDataURL(file);
+      }))
+    );
+
+    setFiles(multiple ? [...files, ...converted] : converted.slice(0, 1));
+  };
+
+  return (
+    <div className="photo-box">
+      <div className="photo-top">
+        <div><b>{label}</b></div>
+        <button type="button" onClick={() => ref.current?.click()}>
+          <Camera size={18}/> Add
+        </button>
+      </div>
+
+      <input
+        ref={ref}
+        type="file"
+        accept="image/*"
+        capture="environment"
+        multiple={multiple}
+        hidden
+        onChange={handleFiles}
+      />
+
+      {previews.length > 0 && (
+        <div className="photo-grid">
+          {previews.map((p, i) => (
+            <div className="photo-preview" key={i}>
+              <img src={p.url}/>
+              <button
+                type="button"
+                onClick={() => setFiles(files.filter((_, idx) => idx !== i))}
+              >
+                <Trash2 size={14}/>
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 function SignaturePad({ value, onChange }) {
   const canvasRef = useRef(null);
   const drawing = useRef(false);
@@ -175,12 +229,13 @@ function App() {
   const [ssaNotified, setSsaNotified] = useState(savedDraft.ssaNotified || false);
   const [caseFiled, setCaseFiled] = useState(savedDraft.caseFiled || '');
   const [signature, setSignature] = useState(savedDraft.signature || '');
-  const [officerPhoto, setOfficerPhoto] = useState([]);
-  const [fieldPhotos, setFieldPhotos] = useState([]);
+ const [officerPhoto, setOfficerPhoto] = useState(savedDraft.officerPhoto || []);
+const [fieldPhotos, setFieldPhotos] = useState(savedDraft.fieldPhotos || []);
   const [busy, setBusy] = useState(false);
 const [session, setSession] = useState(null);
 const [authLoading, setAuthLoading] = useState(true);
 useEffect(() => {
+  useEffect(() => {
   localStorage.setItem(DRAFT_KEY, JSON.stringify({
     visit,
     ratings,
@@ -188,9 +243,11 @@ useEffect(() => {
     summary,
     ssaNotified,
     caseFiled,
-    signature
+    signature,
+    officerPhoto,
+    fieldPhotos
   }));
-}, [visit, ratings, jobNotes, summary, ssaNotified, caseFiled, signature]);
+}, [visit, ratings, jobNotes, summary, ssaNotified, caseFiled, signature, officerPhoto, fieldPhotos]);
 useEffect(() => {
   supabase.auth.getSession().then(({ data }) => {
     setSession(data.session);
