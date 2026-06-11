@@ -202,6 +202,8 @@ function LoginScreen() {
 function App() {
   const reportRef = useRef(null);
   const DRAFT_KEY = 'fosiInspectionDraft';
+  const OFFICER_PHOTO_KEY = 'fosiOfficerPhotoDraft';
+  const FIELD_PHOTOS_KEY = 'fosiFieldPhotosDraft';
 
   const savedDraft = (() => {
     try {
@@ -210,7 +212,6 @@ function App() {
       return {};
     }
   })();
-
   const [visit, setVisit] = useState(savedDraft.visit || {
     client:'',
     vendor:'',
