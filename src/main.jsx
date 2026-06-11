@@ -313,22 +313,27 @@ async function generatePdf(email=false) {
   const blue = '#1F3A68';
   const gray = '#444444';
 
-  const fileToDataUrl = (file) => new Promise((resolve) => {
-  const reader = new FileReader();
-  reader.onload = () => {
-    const img = new Image();
-    img.onload = () => {
-      const canvas = document.createElement('canvas');
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0);
-      resolve(canvas.toDataURL('image/jpeg', 0.9));
+    const fileToDataUrl = (file) => new Promise((resolve) => {
+    if (typeof file === 'string') {
+      resolve(file);
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        resolve(canvas.toDataURL('image/jpeg', 0.9));
+      };
+      img.src = reader.result;
     };
-    img.src = reader.result;
-  };
-  reader.readAsDataURL(file);
-});
+    reader.readAsDataURL(file);
+  });
 
   const addPageIfNeeded = (needed = 0.5) => {
     if (y + needed > pageH - margin) {
