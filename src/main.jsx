@@ -201,6 +201,17 @@ function LoginScreen() {
 function App() {
     const reportRef = useRef(null);
   const DRAFT_KEY = 'fosiInspectionDraft';
+function App() {
+    const reportRef = useRef(null);
+  const DRAFT_KEY = 'fosiInspectionDraft';
+
+  const savedDraft = (() => {
+    try {
+      return JSON.parse(localStorage.getItem(DRAFT_KEY)) || {};
+    } catch {
+      return {};
+    }
+  })();
 
   const savedDraft = (() => {
     try {
