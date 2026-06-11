@@ -243,6 +243,14 @@ const [fieldPhotos, setFieldPhotos] = useState(
 const [session, setSession] = useState(null);
 const [authLoading, setAuthLoading] = useState(true);
 useEffect(() => {
+  try {
+    localStorage.setItem(OFFICER_PHOTO_KEY, JSON.stringify(officerPhoto));
+    localStorage.setItem(FIELD_PHOTOS_KEY, JSON.stringify(fieldPhotos));
+  } catch (error) {
+    console.warn('Photo draft save failed:', error);
+  }
+}, [officerPhoto, fieldPhotos]);
+  useEffect(() => {
   localStorage.setItem(DRAFT_KEY, JSON.stringify({
     visit,
     ratings,
