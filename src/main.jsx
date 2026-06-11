@@ -264,11 +264,12 @@ useEffect(() => {
     console.warn('Officer photo draft save failed:', error);
   }
 
-  try {
-    localStorage.setItem(FIELD_PHOTOS_KEY, JSON.stringify(fieldPhotos));
-  } catch (error) {
-    console.warn('Field photos draft save failed:', error);
-  }
+ try {
+  localStorage.setItem(FIELD_PHOTOS_KEY, JSON.stringify(fieldPhotos));
+  console.log('Field photos saved:', fieldPhotos.length);
+} catch (error) {
+  console.warn('Field photos draft save failed:', error);
+}
 }, [officerPhoto, fieldPhotos]);
   useEffect(() => {
   localStorage.setItem(DRAFT_KEY, JSON.stringify({
