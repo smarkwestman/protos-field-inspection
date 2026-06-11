@@ -144,20 +144,53 @@ function LoginScreen() {
   );
 }
 function App() {
-  const reportRef = useRef(null);
-  const [visit, setVisit] = useState({ client:'', vendor:'', siteName:'', address:'', visitDateTime:new Date().toLocaleString(), fom:'', ssa:'', officerName:'', status:'Complete' });
-  const [ratings, setRatings] = useState({});
-  const [jobNotes, setJobNotes] = useState('');
-  const [summary, setSummary] = useState('');
-  const [ssaNotified, setSsaNotified] = useState(false);
-  const [caseFiled, setCaseFiled] = useState('');
-  const [signature, setSignature] = useState('');
+    const reportRef = useRef(null);
+  const DRAFT_KEY = 'fosiInspectionDraft';
+
+  const savedDraft = (() => {
+    try {
+      return JSON.parse(localStorage.getItem(DRAFT_KEY)) || {};
+    } catch {
+      return {};
+    }
+  })();
+
+  const [visit, setVisit] = useState(savedDraft.visit || {
+    client:'',
+    vendor:'',
+    siteName:'',
+    address:'',
+    visitDateTime:new Date().toLocaleString(),
+    fom:'',
+    ssa:'',
+    officerName:'',
+    guardLicenseOnHand:'',
+    guardLicenseExp:'',
+    status:'Complete'
+  });
+
+  const [ratings, setRatings] = useState(savedDraft.ratings || {});
+  const [jobNotes, setJobNotes] = useState(savedDraft.jobNotes || '');
+  const [summary, setSummary] = useState(savedDraft.summary || '');
+  const [ssaNotified, setSsaNotified] = useState(savedDraft.ssaNotified || false);
+  const [caseFiled, setCaseFiled] = useState(savedDraft.caseFiled || '');
+  const [signature, setSignature] = useState(savedDraft.signature || '');
   const [officerPhoto, setOfficerPhoto] = useState([]);
   const [fieldPhotos, setFieldPhotos] = useState([]);
   const [busy, setBusy] = useState(false);
 const [session, setSession] = useState(null);
 const [authLoading, setAuthLoading] = useState(true);
-
+useEffect(() => {
+  localStorage.setItem(DRAFT_KEY, JSON.stringify({
+    visit,
+    ratings,
+    jobNotes,
+    summary,
+    ssaNotified,
+    caseFiled,
+    signature
+  }));
+}, [visit, ratings, jobNotes, summary, ssaNotified, caseFiled, signature]);
 useEffect(() => {
   supabase.auth.getSession().then(({ data }) => {
     setSession(data.session);
