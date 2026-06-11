@@ -569,6 +569,7 @@ const filename = `Inspection_${visit.siteName || 'Site'}_${new Date().toISOStrin
 
 pdf.save(filename);
 
+resetForm();
 setBusy(false);
 }
 
