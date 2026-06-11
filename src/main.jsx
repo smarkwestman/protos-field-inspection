@@ -211,14 +211,6 @@ function App() {
     }
   })();
 
-  const savedDraft = (() => {
-    try {
-      return JSON.parse(localStorage.getItem(DRAFT_KEY)) || {};
-    } catch {
-      return {};
-    }
-  })();
-
   const [visit, setVisit] = useState(savedDraft.visit || {
     client:'',
     vendor:'',
