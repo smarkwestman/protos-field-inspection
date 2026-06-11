@@ -272,16 +272,15 @@ const [fieldPhotos, setFieldPhotos] = useState([]);
 const [session, setSession] = useState(null);
 const [authLoading, setAuthLoading] = useState(true);
 useEffect(() => {
-  useEffect(() => {
   localStorage.setItem(DRAFT_KEY, JSON.stringify({
-  visit,
-  ratings,
-  jobNotes,
-  summary,
-  ssaNotified,
-  caseFiled,
-  signature
-}));
+    visit,
+    ratings,
+    jobNotes,
+    summary,
+    ssaNotified,
+    caseFiled,
+    signature
+  }));
 }, [visit, ratings, jobNotes, summary, ssaNotified, caseFiled, signature]);
 useEffect(() => {
   supabase.auth.getSession().then(({ data }) => {
