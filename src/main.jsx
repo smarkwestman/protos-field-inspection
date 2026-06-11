@@ -13,7 +13,6 @@ const supabase = createClient(
   import.meta.env.VITE_SUPABASE_ANON_KEY
 );
 
-
 const sections = [
   { key: 'appearance', title: 'Appearance', items: ['Uniform Compliance & Cleanliness', 'Personal Grooming & Hygiene', 'Professional Presence', 'Valid Guard Card', 'Equipment and Readiness'] },
   { key: 'postOrders', title: 'Post Order Compliance / Comprehension', items: ['Post Orders on Site', 'Knows Post Responsibilities', 'Emergency Procedures', 'Post Order Execution'] },
