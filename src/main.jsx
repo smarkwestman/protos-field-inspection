@@ -76,16 +76,18 @@ function PhotoInput({ label, files, setFiles, multiple }) {
         capture="environment"
         multiple={multiple}
         hidden
-        onChange={async e => {
-          const selected = Array.from(e.target.files || []);
-          const converted = await Promise.all(selected.map(fileToDataUrl));
+       onChange={async e => {
+  const selected = Array.from(e.target.files || []);
+  const converted = await Promise.all(selected.map(fileToDataUrl));
 
-          setFiles(
-            multiple
-              ? [...files, ...converted]
-              : converted.slice(0, 1)
-          );
-        }}
+  setFiles(
+    multiple
+      ? [...files, ...converted]
+      : converted.slice(0, 1)
+  );
+
+  e.target.value = '';
+}}
       />
 
       {previews.length > 0 && (
