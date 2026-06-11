@@ -277,6 +277,35 @@ const [fieldPhotos, setFieldPhotos] = useState(
   const [busy, setBusy] = useState(false);
 const [session, setSession] = useState(null);
 const [authLoading, setAuthLoading] = useState(true);
+  const resetForm = () => {
+    const freshVisit = {
+      client: '',
+      vendor: '',
+      siteName: '',
+      address: '',
+      visitDateTime: new Date().toLocaleString(),
+      fom: '',
+      ssa: '',
+      officerName: '',
+      guardLicenseOnHand: '',
+      guardLicenseExp: '',
+      status: 'Complete'
+    };
+
+    setVisit(freshVisit);
+    setRatings({});
+    setJobNotes('');
+    setSummary('');
+    setSsaNotified(false);
+    setCaseFiled('');
+    setSignature('');
+    setOfficerPhoto([]);
+    setFieldPhotos([]);
+
+    localStorage.removeItem(DRAFT_KEY);
+    localStorage.removeItem(OFFICER_PHOTO_KEY);
+    localStorage.removeItem(FIELD_PHOTOS_KEY);
+  };  
 useEffect(() => {
   try {
     localStorage.setItem(OFFICER_PHOTO_KEY, JSON.stringify(officerPhoto));
