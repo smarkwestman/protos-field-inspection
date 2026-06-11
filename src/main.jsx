@@ -39,10 +39,22 @@ function RatingRow({ label, value, onChange }) {
 }
 function PhotoInput({ label, files, setFiles, multiple }) {
   const ref = useRef(null);
+
   const previews = useMemo(
-    () => files.map(file => ({ file, url: URL.createObjectURL(file) })),
+    () =>
+      files.map(file => ({
+        file,
+        url: typeof file === 'string' ? file : URL.createObjectURL(file)
+      })),
     [files]
   );
+
+  const fileToDataUrl = file =>
+    new Promise(resolve => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.readAsDataURL(file);
+    });
 
   return (
     <div className="photo-box">
@@ -64,13 +76,14 @@ function PhotoInput({ label, files, setFiles, multiple }) {
         capture="environment"
         multiple={multiple}
         hidden
-        onChange={e => {
+        onChange={async e => {
           const selected = Array.from(e.target.files || []);
+          const converted = await Promise.all(selected.map(fileToDataUrl));
 
           setFiles(
             multiple
-              ? [...files, ...selected]
-              : selected.slice(0, 1)
+              ? [...files, ...converted]
+              : converted.slice(0, 1)
           );
         }}
       />
