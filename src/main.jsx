@@ -189,7 +189,7 @@ function LoginScreen() {
           />
         </label>
 
-        {error && <p>{error}</p>}
+               {error && <p>{error}</p>}
 
         <button onClick={signIn}>
           Sign In
@@ -198,11 +198,9 @@ function LoginScreen() {
     </div>
   );
 }
+
 function App() {
-    const reportRef = useRef(null);
-  const DRAFT_KEY = 'fosiInspectionDraft';
-function App() {
-    const reportRef = useRef(null);
+  const reportRef = useRef(null);
   const DRAFT_KEY = 'fosiInspectionDraft';
 
   const savedDraft = (() => {
