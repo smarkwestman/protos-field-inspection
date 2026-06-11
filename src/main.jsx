@@ -232,8 +232,13 @@ function App() {
   const [ssaNotified, setSsaNotified] = useState(savedDraft.ssaNotified || false);
   const [caseFiled, setCaseFiled] = useState(savedDraft.caseFiled || '');
   const [signature, setSignature] = useState(savedDraft.signature || '');
-const [officerPhoto, setOfficerPhoto] = useState([]);
-const [fieldPhotos, setFieldPhotos] = useState([]);
+const [officerPhoto, setOfficerPhoto] = useState(
+  JSON.parse(localStorage.getItem(OFFICER_PHOTO_KEY) || '[]')
+);
+
+const [fieldPhotos, setFieldPhotos] = useState(
+  JSON.parse(localStorage.getItem(FIELD_PHOTOS_KEY) || '[]')
+);
   const [busy, setBusy] = useState(false);
 const [session, setSession] = useState(null);
 const [authLoading, setAuthLoading] = useState(true);
